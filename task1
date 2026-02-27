@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命投资</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding: 20px; }
+        .category { margin-bottom: 15px; }
+        label { display: inline-block; width: 120px; }
+        input { width: 80px; padding: 5px; }
+        .bar-container { height: 20px; width: 100%; background: #eee; margin-top: 5px; }
+        .bar { height: 20px; background: #4CAF50; width: 0%; }
+        .total { font-weight: bold; margin-top: 20px; }
+        .warning { color: red; }
+    </style>
+</head>
+<body>
+    <h2>生命投资 (预算: 10,000元)</h2>
+    <div id="categories">
+        <div class="category">
+            <label>植物园公园</label>
+            <input type="number" id="park" value="0" min="0" max="10000" step="100" oninput="update()">
+            <div class="bar-container"><div id="barPark" class="bar" style="width:0%"></div></div>
+        </div>
+        <div class="category">
+            <label>博物馆</label>
+            <input type="number" id="museum" value="0" min="0" max="10000" step="100" oninput="update()">
+            <div class="bar-container"><div id="barMuseum" class="bar" style="width:0%"></div></div>
+        </div>
+        <div class="category">
+            <label>医院</label>
+            <input type="number" id="hospital" value="0" min="0" max="10000" step="100" oninput="update()">
+            <div class="bar-container"><div id="barHospital" class="bar" style="width:0%"></div></div>
+        </div>
+        <div class="category">
+            <label>学校</label>
+            <input type="number" id="school" value="0" min="0" max="10000" step="100" oninput="update()">
+            <div class="bar-container"><div id="barSchool" class="bar" style="width:0%"></div></div>
+        </div>
+        <div class="category">
+            <label>其他</label>
+            <input type="number" id="other" value="0" min="0" max="10000" step="100" oninput="update()">
+            <div class="bar-container"><div id="barOther" class="bar" style="width:0%"></div></div>
+        </div>
+    </div>
+    <div class="total">总花费: <span id="total">0</span> / 10000</div>
+    <div id="warning" class="warning"></div>
+
+    <script>
+        function update() {
+            let park = parseInt(document.getElementById('park').value) || 0;
+            let museum = parseInt(document.getElementById('museum').value) || 0;
+            let hospital = parseInt(document.getElementById('hospital').value) || 0;
+            let school = parseInt(document.getElementById('school').value) || 0;
+            let other = parseInt(document.getElementById('other').value) || 0;
+            let total = park + museum + hospital + school + other;
+            document.getElementById('total').innerText = total;
+
+            // Update bars (max width 100% based on 10000)
+            document.getElementById('barPark').style.width = (park/100) + '%';
+            document.getElementById('barMuseum').style.width = (museum/100) + '%';
+            document.getElementById('barHospital').style.width = (hospital/100) + '%';
+            document.getElementById('barSchool').style.width = (school/100) + '%';
+            document.getElementById('barOther').style.width = (other/100) + '%';
+
+            let warning = document.getElementById('warning');
+            if (total > 10000) {
+                warning.innerText = '超出预算！请减少金额。';
+            } else if (total < 10000) {
+                warning.innerText = '还有剩余资金，可以增加投入。';
+            } else {
+                warning.innerText = '预算正好用完。';
+            }
+        }
+    </script>
+</body>
+</html>
