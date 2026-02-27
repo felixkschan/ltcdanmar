@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的付出</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding: 20px; text-align: center; }
+        .scale-container { width: 100%; height: 50px; background: #ddd; margin: 20px 0; position: relative; }
+        .fill { height: 50px; background: #4CAF50; width: 0%; }
+        .slider { width: 100%; }
+        .percentage { font-size: 2em; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h2>你的付出 (愿意委身给上帝的程度)</h2>
+    <input type="range" min="0" max="100" value="50" class="slider" id="devotionSlider" oninput="updateFill()">
+    <div class="percentage"><span id="percent">50</span>%</div>
+    <div class="scale-container">
+        <div id="fillBar" class="fill" style="width:50%"></div>
+    </div>
+    <p>拖动滑块表示你今天愿意付出的百分比。</p>
+    <script>
+        function updateFill() {
+            let val = document.getElementById('devotionSlider').value;
+            document.getElementById('percent').innerText = val;
+            document.getElementById('fillBar').style.width = val + '%';
+        }
+    </script>
+</body>
+</html>
